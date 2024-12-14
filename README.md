@@ -23,6 +23,8 @@ This is done either in the CIM Datamodel macros such as `cim_Network_Traffic_ind
 
 That's it for setup! After that you're ready to go. The built-in scheduled searches will simulate the events in the lookups hourly but you can also manually run them if needed.
 
+![Alt text](Dashboard%20Demo.png)
+
 ## Newly Released Features & Future Items
 This app has come a long way already. The most recent update adds native eventtypes and tagging for the simulations in the `readythreatgo` index so the events are compatible with the datamodels out of the box with no extra setup. This reduced the onboarding to just the single step of adding the index to the datamodels' macros. This one step will remain manual as RTG automatically deploys simulations and I'd like to avoid giving some SOC somewhere an absolute heart attack. Adding the index to the datamodel macros manually ensures you're aware that simulation telemetry will be enabled and generating alerts so no one blows through their IR retainer thinking the sky is falling :)
 
