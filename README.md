@@ -17,7 +17,7 @@ The lookups contain the fields and values for each event. The contents of these 
 
 ## Initial Setup
 There is just one step to configure the datamodels to use the simulation data:
-> * The "readythreatgo" index needs to the added to the datamodels' constraints
+> * The "readythreatgo" index needs to be added to the datamodels' constraints
 
 This is done either in the CIM Datamodel macros such as `cim_Network_Traffic_indexes` or via the CIM app setup GUI. This should take less than 10 seconds per datamodel and look something like this when complete: `index IN (network,firewall,readythreatgo)`.
 
