@@ -15,6 +15,7 @@ Threat Events or Threat Sets (simulations involving more than a single event lik
 
 The lookups contain the fields and values for each event. The contents of these lookups are retrieved by hourly searches that then output the events to the "readythreatgo" summary index. Once the events are in the summary index the data will seamlessly filter into the respective datamodels where detections will then fire. 
 
+## Onboarding & Initial Setup
 There are a few inital onboarding steps to configure the datamodels to use the simulation data:
 > 1. The "readythreatgo" index needs to the added to the datamodels' constraints
 > 2. The respective source values such as source="rtg_network" need to be added to the datamodels' contraints to filter to the relevant events
