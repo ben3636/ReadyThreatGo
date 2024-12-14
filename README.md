@@ -15,9 +15,10 @@ Threat Events or Threat Sets (simulations involving more than a single event lik
 
 The lookups contain the fields and values for each event. The contents of these lookups are retrieved by hourly searches that then output the events to the "readythreatgo" summary index. Once the events are in the summary index the data will seamlessly filter into the respective datamodels where detections will then fire. 
 
-## Onboarding & Initial Setup
-There are a few inital onboarding steps to configure the datamodels to use the simulation data:
-> 1. The "readythreatgo" index needs to the added to the datamodels' constraints
-> 2. The respective source values such as source="rtg_network" need to be added to the datamodels' contraints to filter to the relevant events
+## Initial Setup
+There is just one step to configure the datamodels to use the simulation data:
+> * The "readythreatgo" index needs to the added to the datamodels' constraints
 
-These are the basic steps required for setup, after that you're ready to go. The built-in scheduled searches will simulate the events in the lookups hourly but you can also manually run them if needed.
+This is done either in the CIM Datamodel macros such as `cim_Network_Traffic_indexes` or via the CIM app setup GUI. This should take less than 10 seconds per datamodel and look something like this when complete: `index IN (network,firewall,readythreatgo)`.
+
+That's it for setup! After that you're ready to go. The built-in scheduled searches will simulate the events in the lookups hourly but you can also manually run them if needed.
