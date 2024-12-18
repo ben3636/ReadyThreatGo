@@ -31,7 +31,7 @@ That's it for setup! After that you're ready to go. The built-in scheduled searc
 
 ## Newly Released Features & Future Items
 ### New Features:
-* New data type and simulations: `DNS`
+* New data types and simulations: `DNS` & `Windows Services`
 * Index level simulation support!
    * There are two index-level sourcetypes with simulations out-of-the-box: `wineventlog:security` and `xmlwineventlog:security`. 
    * There is a lookup for each, to add events simply paste the raw event in the "raw" field and be sure to enable it with the "enabled' field.
@@ -39,6 +39,7 @@ That's it for setup! After that you're ready to go. The built-in scheduled searc
 > NOTE: You will need to install the Windows TA on Splunk for these to work correctly. RTG does some compliancy on those events but ultimately passes them to the native TA to get all the calculated fields and extractions real data would. 
 * The dashboard now has a manual deploy button!
    * This lets you run all the out-of-the-box simulation searches with a single click, especially if you just installed the app and don't want to wait an hour for the simulations to run. If you add your own saved searches be sure to add them to that drilldown.
+* New Simulation Library pane to view all the Threat Events in the lookups 
 
 ### Future Items:
 * Splunk's process for merging conflicts between locally-modified content and the content in app itself is less than seamless. As it stands right now, any lookup or saved search you `modify` vs cloning and editing will branch off and not recieve new updates if you update the app. On a technical level, the app ships with lookups, saved searches, and dashboards inside `/opt/splunk/etc/apps/ReadyThreatGo/default/` and when you modify one of those default items you create a copy inside `/opt/splunk/etc/apps/ReadyThreatGo/local/` that will then override anything in the default directory, including new content from app updates. This only impacts objects you have locally modified, everything else will get updates. For example, if you have added custom content to one lookup, everything else will get new updates except for that lookup until you merge the two copies. I intend to make the lookups available for direct download so you can add the new content directly via lookup editor in case you have a locally modified copy that you don't want to merge manually in the filesystem.
