@@ -30,6 +30,16 @@ That's it for setup! After that you're ready to go. The built-in scheduled searc
 ![Alt text](Dashboard%20Demo.png)
 
 ## Newly Released Features & Future Items
-This app has come a long way already. The most recent update adds native eventtypes and tagging for the simulations in the `readythreatgo` index so the events are compatible with the datamodels out of the box with no extra setup. This reduced the onboarding to just the single step of adding the index to the datamodels' macros. This one step will remain manual because it serves as the consent/acknowledgment that RTG will begin firing alerts.
+### New Features:
+* New data type and simulations: `DNS`
+* Index level simulation support!
+   * There are two index-level sourcetypes with simulations out-of-the-box: `wineventlog:security` and `xmlwineventlog:security`. 
+   * There is a lookup for each, to add events simply paste the raw event in the "raw" field and be sure to enable it with the "enabled' field.
+   * The classic Wineventlog:security sourcetype expects certain fields that a Splunk forwarder would usually add in before sending the event to Splunk. If you have issues with extraction copy the existing entry in the lookup already and change values you need to such as commandline, parent process, etc and you should be all set.
+> NOTE: You will need to install the Windows TA on Splunk for these to work correctly. RTG does some compliancy on those events but ultimately passes them to the native TA to get all the calculated fields and extractions real data would. 
+* Dashboard now has a manual deploy button!
+   * This lets you run all the out-of-the-box simulation searches with a single click, especially if you just installed the app and don't want to wait an hour for the simulations to run. If you add your own saved searches be sure to add them to that drilldown.
 
-Additionally I will shortly be adding support for `index-level event simulation`. This will allow you to place raw events in their entirety such as Wineventlog in a lookup where they will be output to the readythreatgo index for simulation. This has been tested with XMLWineventlog already and can successfully pass the simulated event off to the Windows TA (if installed) so the event lands in the summary index with all the calculated fields and tagging required to be indistinguishable from real telemetry. As of now, it seems that there will be one lookup per sourcetype as well as a corresponding scheduled search to handle the actual simulation. I will update the documentation to cover the process of adding custom index-level simulations which should entail creating a lookup/scheduled search with the appropriate lookup name and sourcetype specified. More to come :)
+
+
+
