@@ -14,6 +14,7 @@ Threat Events or Threat Sets (simulations involving more than a single event lik
 > 1. Endpoint Processes
 > 2. Network Traffic
 > 3. Web Proxy
+> 4. DNS
 
 The lookups contain the fields and values for each event. The contents of these lookups are retrieved by hourly searches that then output the events to the "readythreatgo" summary index. Once the events are in the summary index the data will seamlessly filter into the respective datamodels where detections will then fire. 
 
@@ -29,9 +30,20 @@ That's it for setup! After that you're ready to go. The built-in scheduled searc
 
 ![Alt text](Dashboard%20Demo.png)
 
+## Adding Custom Simulations
+While there are plenty of simulations included, this app was made to customize! If you want to add your own simulations, all you need to do is add them to the appropriate lookup(s) such as `rtg_endpoint_process`. You can do this via Splunk's lookup editor app. Note the `enabled` value in each lookup, that needs to be set to `true` for the simulation to run and if you have default simulations you don't want running, you can set that same value to `false`. 
+
+There should be a lookup already for most data types at the datamodel level and there are a few default index-level items such as Wineventlog and XMLWineventlog. Should you need a new data type you will need to make a clone of one of the lookups and it's corresponding saved search. From there, you can rename your lookup (be sure to update the new name in the saved search) and add simulations in. Any locally-created lookups and saved searches will remain even when you update the app. 
+
+Adding a new data type for a datamodel requires that you ensure you choose the field names in your lookup that will work with the destination datamodel's field calculations. Depending on the tags and constraints required for the datamodel you may have to add a new eventtype in eventtypes.conf and a tag entry in tags.conf where the appropriate tags are added in. It should be easy to copy one of the existing entries in both of those files and change the values you need to. Again, I have already added native support for most common datamodels but this is the process should you need something else. 
+
+Adding a new data type for an index-level simulation requires that you specify the correct sourcetype (and sometimes `source` as well) in the `collect` command in the saved search. This depends on the sourcetype you're using and the TA you'll be passing the simulations to via `collect`. Trial and error is your friend here, check out the default index-level simulation lookups and saved searches such as Wineventlog if you get stuck.
+
+> WARNING: If you make local modifications to any of the default lookups, you need to download/backup your custom copies before updating the app. Updating the app will overwrite any changes you have performed to the default lookups and restore them to the default/updated state. Once you update you can copy your local additions back in via lookup editor.
+
 ## Newly Released Features & Future Items
 ### New Features:
-* New data types and simulations: `DNS` & `Windows Services`
+* New data types and simulations: `DNS`, `Windows Services`, & `Authentication`
 * Index level simulation support!
    * There are two index-level sourcetypes with simulations out-of-the-box: `wineventlog:security` and `xmlwineventlog:security`. 
    * There is a lookup for each, to add events simply paste the raw event in the "raw" field and be sure to enable it with the "enabled' field.
@@ -43,9 +55,7 @@ That's it for setup! After that you're ready to go. The built-in scheduled searc
 
 ### Future Items:
 * `Windows Scheduled Tasks` simulations at index level
-* `Authentication` simulations
 * Windows index-level `4624` & `4625` simulations
 * Simulation ID's, descriptions, & MITRE mappings
-* Splunk's process for merging conflicts between locally-modified content and the content in app itself is less than seamless. As it stands right now, any lookup or saved search you `modify` vs cloning and editing will branch off and not recieve new updates if you update the app. On a technical level, the app ships with lookups, saved searches, and dashboards inside `/opt/splunk/etc/apps/ReadyThreatGo/default/` and when you modify one of those default items you create a copy inside `/opt/splunk/etc/apps/ReadyThreatGo/local/` that will then override anything in the default directory, including new content from app updates. This only impacts objects you have locally modified, everything else will get updates. For example, if you have added custom content to one lookup, everything else will get new updates except for that lookup until you merge the two copies. I intend to make the lookups available for direct download so you can add the new content directly via lookup editor in case you have a locally modified copy that you don't want to merge manually in the filesystem.
 
 
