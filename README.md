@@ -26,7 +26,7 @@ This is done either in the CIM Datamodel macros such as `cim_Network_Traffic_ind
 
 That's it for setup! After that you're ready to go. The built-in scheduled searches will simulate the events in the lookups hourly but you can also manually run them if needed.
 
-> NOTE: After first installing the app, the hourly searches that simulate the events will not run for a full hour. If you don't want to wait you can click the manual deploy button in the main dashboard
+> NOTE: After first installing the app, the hourly searches that simulate the events will not run until the top of the next hour. If you don't want to wait you can click the manual deploy button in the main dashboard
 
 ![Alt text](Dashboard%20Demo.png)
 
