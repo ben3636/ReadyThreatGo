@@ -28,7 +28,8 @@ That's it for setup! After that you're ready to go. The built-in scheduled searc
 
 > NOTE: After first installing the app, the hourly searches that simulate the events will not run until the top of the next hour. If you don't want to wait you can click the manual deploy button in the main dashboard
 
-![Alt text](Dashboard%20Demo.png)
+![Alt text](Main%20Dashboard%20Demo.png)
+![Alt text](Simulation%20Library%20Demo.png)
 
 ## Adding Custom Simulations
 While there are plenty of simulations included, this app was made to customize! If you want to add your own simulations, all you need to do is add them to the appropriate lookup(s) such as `rtg_endpoint_process.csv`. You can do this via Splunk's lookup editor app. Note the `enabled` value in each lookup, that needs to be set to `true` for the simulation to run and if you have default simulations you don't want running, you can set that same value to `false`. 
