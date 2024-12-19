@@ -5,7 +5,7 @@ Ready Threat Go (RTG) is a Splunk app developed as an augmentation to the Splunk
 
 1. Enable security teams to simulate custom threat data within their SIEM to understand where they stand in detection coverage
 2. Provide a public repository of observed threat artifacts (sample SIEM events) for immediate use
-3. Map individual Threat Events (TE) and Threat Sets (TS) to detection coverage and easily/routinely run the simulations to identify changes or gaps in detection coverage
+3. Enable security teams to map individual Threat Events (TE) and Threat Sets (TS) to detection coverage and easily/routinely run the simulations to identify changes or gaps in detection coverage
 
 As a general summary, this app `creates simulated events in Splunk that go into an index and the various datamodels. The events are stored in lookups which already include sample events but can be modified or added to depending on what you want to simulate.`
 
