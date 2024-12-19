@@ -28,6 +28,9 @@ That's it for setup! After that you're ready to go. The built-in scheduled searc
 
 > NOTE: After first installing the app, the hourly searches that simulate the events will not run until the top of the next hour. If you don't want to wait you can click the manual deploy button in the main dashboard
 
+## Demo & Screenshots
+[Demo Video](https://drive.google.com/file/d/1rpsDMG0i6JVu6Tnt5a8RBJFCoWSZaYqA/view?usp=share_link)
+
 ![Alt text](Main%20Dashboard%20Demo.png)
 ![Alt text](Simulation%20Library%20Demo.png)
 
