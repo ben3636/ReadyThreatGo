@@ -33,6 +33,8 @@ That's it for setup! After that you're ready to go. The built-in scheduled searc
 
 ![Alt text](Main%20Dashboard%20Demo.png)
 ![Alt text](Main%20Dashboard%20Demo%202.png)
+
+
 ![Alt text](Simulation%20Library%20Demo.png)
 ![Alt text](Simulation%20Library%20Demo%202.png)
 
