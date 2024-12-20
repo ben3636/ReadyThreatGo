@@ -50,6 +50,7 @@ Adding a new data type for an index-level simulation requires that you specify t
 
 ## Newly Released Features & Future Items
 ### New Features:
+* MITRE mappings & related dashboard panels
 * New data types and simulations: `DNS`, `Windows Services`, & `Authentication`
 * Simulation ID's and descriptions in the lookups
 * Index level simulation support!
@@ -64,6 +65,5 @@ Adding a new data type for an index-level simulation requires that you specify t
 ### Future Items:
 * `Windows Scheduled Tasks` simulations at index level
 * Windows index-level `4624` & `4625` simulations
-* MITRE mappings
 
 
