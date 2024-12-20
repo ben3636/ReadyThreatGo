@@ -32,7 +32,10 @@ That's it for setup! After that you're ready to go. The built-in scheduled searc
 [Demo Video](https://drive.google.com/file/d/1rpsDMG0i6JVu6Tnt5a8RBJFCoWSZaYqA/view?usp=share_link)
 
 ![Alt text](Main%20Dashboard%20Demo.png)
+![Alt text](Main%20Dashboard%20Demo%202.png)
 ![Alt text](Simulation%20Library%20Demo.png)
+![Alt text](Simulation%20Library%20Demo%202.png)
+
 
 ## Adding Custom Simulations
 While there are plenty of simulations included, this app was made to customize! If you want to add your own simulations, all you need to do is add them to the appropriate lookup(s) such as `rtg_endpoint_process.csv`. You can do this via Splunk's lookup editor app. Note the `enabled` value in each lookup, that needs to be set to `true` for the simulation to run and if you have default simulations you don't want running, you can set that same value to `false`. 
