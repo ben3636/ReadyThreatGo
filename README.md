@@ -60,8 +60,8 @@ Adding a new data type for an index-level simulation requires that you specify t
    * There is a lookup for each, to add events simply paste the raw event in the "raw" field and be sure to enable it with the "enabled' field.
    * The classic Wineventlog:security sourcetype expects certain fields that a Splunk forwarder would usually add in before sending the event to Splunk. If you have issues with extraction copy the existing entry in the lookup already and change values you need to such as commandline, parent process, etc and you should be all set.
 > NOTE: You will need to install the Windows TA on Splunk for these to work correctly. RTG does some compliancy on those events but ultimately passes them to the native TA to get all the calculated fields and extractions real data would. 
-* The main dashboard now has a simulation deployment console!
-   * This lets you run all or specific simulation searches with a single click, especially if you just installed the app and don't want to wait an hour for the simulations to run.
+* Simulation Deployment Console Dashboard
+   * This lets you run all or specific saved searches with a single click, especially if you just installed the app and don't want to wait an hour for the simulations to run.
 * New Simulation Library pane to view all the Threat Events in the lookups 
 
 ### Future Items:
