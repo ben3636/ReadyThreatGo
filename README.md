@@ -65,7 +65,14 @@ Adding a new data type for an index-level simulation requires that you specify t
 * New Simulation Library pane to view all the Threat Events in the lookups 
 
 ### Future Items:
-* `Windows Scheduled Tasks` simulations at index level
+* `Windows Scheduled Task` simulations at index level
 * Windows index-level `4624` & `4625` simulations
+* Timing offsets (add custom time delay to simulate a linear attack progression)
+* Adversary Profiles
+   * Leverage the native MITRE mappings with MITRE's procedural database to browse simulations that match the Tactic/Techniques used by certain threat actors
+
+
+
+
 
 
