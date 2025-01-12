@@ -61,16 +61,17 @@ Adding a new data type for an index-level simulation requires that you specify t
    * The classic Wineventlog:security sourcetype expects certain fields that a Splunk forwarder would usually add in before sending the event to Splunk. If you have issues with extraction copy the existing entry in the lookup already and change values you need to such as commandline, parent process, etc and you should be all set.
 > NOTE: You will need to install the Windows TA on Splunk for these to work correctly. RTG does some compliancy on those events but ultimately passes them to the native TA to get all the calculated fields and extractions real data would. 
 * Simulation Deployment Console Dashboard
-   * This lets you run all or specific saved searches with a single click, especially if you just installed the app and don't want to wait an hour for the simulations to run.
-* New Simulation Library pane to view all the Threat Events in the lookups 
+   * This lets you run all or specific saved searches with a single click, especially if you just installed the app and don't want to wait until the top of the next hour for the simulations to run.
+* New Simulation Library dashboard to view all the Threat Events in the lookups 
+* Timing Offsets!
+  * This gives you an optional field in the lookups to specify a number of seconds to delay the event's timestamp. This allows you to customize the timing of simulations and create chains of activity that occur in chronological order
+* Adversary Profiles
+   * Leverage the MITRE's procedural database to browse tactics and techniques used by certain threat actors
+   * View relevant simulations matching the technique and/or subtechnique of a specific threat actor
 
 ### Future Items:
 * `Windows Scheduled Task` simulations at index level
 * Windows index-level `4624` & `4625` simulations
-* Timing offsets (add custom time delay to simulate a linear attack progression)
-* Adversary Profiles
-   * Leverage the native MITRE mappings with MITRE's procedural database to browse simulations that match the Tactic/Techniques used by certain threat actors
-
 
 
 
