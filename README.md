@@ -72,6 +72,9 @@ Adding a new data type for an index-level simulation requires that you specify t
 ### Future Items:
 * `Windows Scheduled Task` simulations at index level
 * Windows index-level `4624` & `4625` simulations
+* Additional MITRE tactics and techniques for each simulation
+  * Some simulations like `Powershell download cradle being used to download Mimikatz from Github` are C2/Tool Ingress but also Execution. In the next update simulations that relate to multiple tactics/techniques will have the secondary/alternate mappings included in the lookup for easier browsing and enrichment
+
 
 
 
