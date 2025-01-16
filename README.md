@@ -43,7 +43,7 @@ That's it for setup! After that you're ready to go. The built-in scheduled searc
 ![Alt text](Example%20Tstats%20Search%20Demo.png)
 
 ## Adding Custom Simulations
-While there are plenty of simulations included, this app was made to customize! If you want to add your own simulations, all you need to do is add them to the appropriate lookup(s) such as `ReadyThreatGo_Datamodel_Endpoint_Process.csv`. You can do this via Splunk's lookup editor app. Note the `enabled` value in each lookup, that needs to be set to `true` for the simulation to run and if you have default simulations you don't want running, you can set that same value to `false`. 
+While there are plenty of simulations included, this app was made to customize! If you want to add your own simulations, all you need to do is add them to the appropriate lookup(s) such as `ReadyThreatGo_Datamodel_Endpoint_Process.csv`. You can do this via Splunk's lookup editor app. Note the `enabled` value in each lookup, that needs to be set to `TRUE` for the simulation to run and if you have default simulations you don't want running, you can set that same value to `FALSE`. 
 
 There should be a lookup already for most data types at the datamodel level and there are a few default index-level items such as Wineventlog and XMLWineventlog. Should you need a new data type you will need to make a clone of one of the lookups and its corresponding saved search. From there, you can rename your lookup (be sure to update the new name in the saved search) and add simulations in. Any locally-created lookups and saved searches will remain even when you update the app. 
 
