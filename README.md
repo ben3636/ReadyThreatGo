@@ -68,12 +68,13 @@ Adding a new data type for an index-level simulation requires that you specify t
 * Adversary Profiles
    * Leverage the MITRE's procedural database to browse tactics and techniques used by certain threat actors
    * View relevant simulations matching the technique and/or subtechnique of a specific threat actor
+* Windows index-level `4624` & `4625` simulations
+* `Windows Scheduled Task` simulations at index level
+* Additional MITRE tactics and techniques for each simulation
+  * Some simulations like `Powershell download cradle being used to download Mimikatz from Github` are C2/Tool Ingress but also Execution. In the last update simulations that related to multiple tactics/techniques received secondary/alternate mappings included in the lookup for easier browsing and enrichment
 
 ### Future Items:
-* `Windows Scheduled Task` simulations at index level
-* Windows index-level `4624` & `4625` simulations
-* Additional MITRE tactics and techniques for each simulation
-  * Some simulations like `Powershell download cradle being used to download Mimikatz from Github` are C2/Tool Ingress but also Execution. In the next update simulations that relate to multiple tactics/techniques will have the secondary/alternate mappings included in the lookup for easier browsing and enrichment
+* Backlog is cleared for now, expect some new demo videos soon :)
 
 
 
