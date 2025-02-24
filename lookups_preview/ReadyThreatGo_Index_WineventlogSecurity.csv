@@ -1,0 +1,251 @@
+id,simulation_type,description,enabled,raw,mitre_tactic,mitre_technique,sources,time_delay_seconds
+INDEX-WINEVT-TE-01,Threat Event,Vssadmin being used to delete shadow copies,TRUE,"LogName=Security
+EventCode=4688
+EventType=0
+ComputerName=WKS02
+SourceName=Microsoft Windows security auditing.
+Type=Information
+RecordNumber=12217
+Keywords=Audit Success
+TaskCategory=Process Creation
+OpCode=Info
+Message=A new process has been created.
+
+Creator Subject:
+        Security ID:                S-1-5-21-4772304873-213439841-287112046-2083
+        Account Name:                tom.hanks
+        Account Domain:                READYTHREATGO
+        Logon ID:                0x51E34
+
+Target Subject:
+        Security ID:                S-1-0-0
+        Account Name:                -
+        Account Domain:                -
+        Logon ID:                0x0
+
+Process Information:
+        New Process ID:                0x2590
+        New Process Name:        C:\Windows\System32\whoami.exe
+        Token Elevation Type:        %%1938
+        Mandatory Label:                S-1-16-8192
+        Creator Process ID:        0x265c
+        Creator Process Name:        C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+        Process Command Line:        C:\Windows\system32\vssadmin.exe delete shadows /all /quiet
+
+Token Elevation Type indicates the type of token that was assigned to the new process in accordance with User Account Control policy.
+
+Type 1 is a full token with no privileges removed or groups disabled.  A full token is only used if User Account Control is disabled or if the user is the built-in Administrator account or a service account.
+
+Type 2 is an elevated token with no privileges removed or groups disabled.  An elevated token is used when User Account Control is enabled and the user chooses to start the program using Run as administrator.  An elevated token is also used when an application is configured to always require administrative privilege or to always require maximum privilege, and the user is a member of the Administrators group.
+
+Type 3 is a limited token with administrative privileges removed and administrative groups disabled.  The limited token is used when User Account Control is enabled, the application does not require administrative privilege, and the user does not choose to start the program using Run as administrator.","Impact
+Execution","Inhibit System Recovery
+Command and Scripting Interpreter: Windows Command Shell",,
+INDEX-WINEVT-TE-02,Threat Event,4624 - Successful Logon,TRUE,"LogName=Security
+EventCode=4624
+EventType=0
+ComputerName=READYTHREATGO
+SourceName=Microsoft Windows security auditing.
+Type=Information
+RecordNumber=14236
+Keywords=Audit Success
+TaskCategory=Logon
+OpCode=Info
+Message=An account was successfully logged on.
+
+Subject:
+        Security ID:                S-1-5-18
+        Account Name:                READYTHREATGO$
+        Account Domain:                WORKGROUP
+        Logon ID:                0x3E7
+
+Logon Information:
+        Logon Type:                2
+        Restricted Admin Mode:        -
+        Virtual Account:                No
+        Elevated Token:                No
+
+Impersonation Level:                Impersonation
+
+New Logon:
+        Security ID:                S-1-5-21-4772304873-213439841-287112046-2083
+        Account Name:                tom.cruise
+        Account Domain:                READYTHREATGO
+        Logon ID:                0x17466E
+        Linked Logon ID:                0x17464F
+        Network Account Name:        -
+        Network Account Domain:        -
+        Logon GUID:                {00000000-0000-0000-0000-000000000000}
+
+Process Information:
+        Process ID:                0x6a0
+        Process Name:                C:\Windows\System32\svchost.exe
+
+Network Information:
+        Workstation Name:        READYTHREATGO
+        Source Network Address:        127.0.0.1
+        Source Port:                0
+
+Detailed Authentication Information:
+        Logon Process:                User32 
+        Authentication Package:        Negotiate
+        Transited Services:        -
+        Package Name (NTLM only):        -
+        Key Length:                0
+
+This event is generated when a logon session is created. It is generated on the computer that was accessed.
+
+The subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.
+
+The logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).
+
+The New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.
+
+The network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.
+
+The impersonation level field indicates the extent to which a process in the logon session can impersonate.
+
+The authentication information fields provide detailed information about this specific logon request.
+        - Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.
+        - Transited services indicate which intermediate services have participated in this logon request.
+        - Package name indicates which sub-protocol was used among the NTLM protocols.
+        - Key length indicates the length of the generated session key. This will be 0 if no session key was requested.","Initial Access
+Persistence",Valid Accounts: Local Accounts,,
+INDEX-WINEVT-TE-03,Threat Event,4625 - Failed Logon,TRUE,"LogName=Security
+EventCode=4625
+EventType=0
+ComputerName=READYTHREATGO
+SourceName=Microsoft Windows security auditing.
+Type=Information
+RecordNumber=14233
+Keywords=Audit Failure
+TaskCategory=Logon
+OpCode=Info
+Message=An account failed to log on.
+
+Subject:
+        Security ID:                S-1-5-18
+        Account Name:                READYTHREATGO$
+        Account Domain:                WORKGROUP
+        Logon ID:                0x3E7
+
+Logon Type:                        2
+
+Account For Which Logon Failed:
+        Security ID:                S-1-0-0
+        Account Name:                spider.man
+        Account Domain:                READYTHREATGO
+
+Failure Information:
+        Failure Reason:                Unknown user name or bad password.
+        Status:                        0xC000006D
+        Sub Status:                0xC000006A
+
+Process Information:
+        Caller Process ID:        0x6a0
+        Caller Process Name:        C:\Windows\System32\svchost.exe
+
+Network Information:
+        Workstation Name:        READYTHREATGO
+        Source Network Address:        127.0.0.1
+        Source Port:                0
+
+Detailed Authentication Information:
+        Logon Process:                User32 
+        Authentication Package:        Negotiate
+        Transited Services:        -
+        Package Name (NTLM only):        -
+        Key Length:                0
+
+This event is generated when a logon request fails. It is generated on the computer where access was attempted.
+
+The Subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.
+
+The Logon Type field indicates the kind of logon that was requested. The most common types are 2 (interactive) and 3 (network).
+
+The Process Information fields indicate which account and process on the system requested the logon.
+
+The Network Information fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.
+
+The authentication information fields provide detailed information about this specific logon request.
+        - Transited services indicate which intermediate services have participated in this logon request.
+        - Package name indicates which sub-protocol was used among the NTLM protocols.
+        - Key length indicates the length of the generated session key. This will be 0 if no session key was requested.","Initial Access
+Persistence",Valid Accounts: Local Accounts,,
+INDEX-WINEVT-TE-04,Threat Event,4698 - Scheduled Task Created,TRUE,"LogName=Security
+EventCode=4698
+EventType=0
+ComputerName=READYTHREATGO
+SourceName=Microsoft Windows security auditing.
+Type=Information
+RecordNumber=14148
+Keywords=Audit Success
+TaskCategory=Other Object Access Events
+OpCode=Info
+Message=A scheduled task was created.
+
+Subject:
+        Security ID:                S-1-5-21-4772304873-213439841-287112046-2083
+        Account Name:                spider.man
+        Account Domain:                READYTHREATGO
+        Logon ID:                0x1C55B
+
+Task Information:
+        Task Name:                 \WindowsUpdateService
+        Task Content:                 <?xml version=""1.0"" encoding=""UTF-16""?>
+<Task version=""1.2"" xmlns=""http://schemas.microsoft.com/windows/2004/02/mit/task"">
+  <RegistrationInfo>
+    <Date>2025-01-15T17:58:11</Date>
+    <Author>READYTHREATGO\spider.man</Author>
+    <URI>\WindowsUpdateService</URI>
+  </RegistrationInfo>
+  <Triggers>
+    <TimeTrigger>
+      <Repetition>
+        <Interval>PT1H</Interval>
+        <StopAtDurationEnd>false</StopAtDurationEnd>
+      </Repetition>
+      <StartBoundary>2025-01-15T17:58:00</StartBoundary>
+      <Enabled>true</Enabled>
+    </TimeTrigger>
+  </Triggers>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>true</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>true</StopIfGoingOnBatteries>
+    <AllowHardTerminate>true</AllowHardTerminate>
+    <StartWhenAvailable>false</StartWhenAvailable>
+    <RunOnlyIfNetworkAvailable>false</RunOnlyIfNetworkAvailable>
+    <IdleSettings>
+      <Duration>PT10M</Duration>
+      <WaitTimeout>PT1H</WaitTimeout>
+      <StopOnIdleEnd>true</StopOnIdleEnd>
+      <RestartOnIdle>false</RestartOnIdle>
+    </IdleSettings>
+    <AllowStartOnDemand>true</AllowStartOnDemand>
+    <Enabled>true</Enabled>
+    <Hidden>false</Hidden>
+    <RunOnlyIfIdle>false</RunOnlyIfIdle>
+    <WakeToRun>false</WakeToRun>
+    <ExecutionTimeLimit>PT72H</ExecutionTimeLimit>
+    <Priority>7</Priority>
+  </Settings>
+  <Actions Context=""Author"">
+    <Exec>
+      <Command>calc.exe</Command>
+    </Exec>
+  </Actions>
+  <Principals>
+    <Principal id=""Author"">
+      <UserId>S-1-5-18</UserId>
+      <RunLevel>LeastPrivilege</RunLevel>
+    </Principal>
+  </Principals>
+</Task>
+
+Other Information:
+        ProcessCreationTime:                 2533274790396178
+        ClientProcessId:                         10060
+        ParentProcessId:                         6700
+        FQDN:                 0","Execution
+Persistence",Scheduled Task/Job: Scheduled Task,,

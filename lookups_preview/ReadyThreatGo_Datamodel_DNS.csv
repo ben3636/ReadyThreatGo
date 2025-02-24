@@ -1,0 +1,8 @@
+id,simulation_type,description,enabled,src,query,query_type,mitre_tactic,mitre_technique,sources,time_delay_seconds
+DNS-TE-01,Threat Event,Query to external IP lookup tool,TRUE,192.168.1.4,ifconfig.me,A,Reconnaissance,Gather Victim Network Information,,
+DNS-TE-02,Threat Event,Query to external IP lookup tool,TRUE,192.168.1.7,ip-api.com,A,Reconnaissance,Gather Victim Network Information,,
+DNS-TE-03,Threat Event,Query to external IP lookup tool,TRUE,192.168.1.10,ipinfo.io,A,Reconnaissance,Gather Victim Network Information,,
+DNS-TE-04,Threat Event,Query to mega.io (common cloud exfiltration site),TRUE,192.168.1.11,mega.io,A,Exfiltration,"Exfiltration Over Web Service
+Transfer Data to Cloud Account
+Exfiltration Over Web Service: Exfiltration to Cloud Storage",,
+DNS-TE-05,Threat Event,Query to exploit-db.com (exploit code hosting),TRUE,192.168.1.11,exploit-db.com,A,Command and Control,Ingress Tool Transfer,,
