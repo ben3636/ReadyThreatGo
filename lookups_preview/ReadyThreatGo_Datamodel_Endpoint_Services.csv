@@ -1,4 +1,0 @@
-id,simulation_type,description,enabled,dest,user,service_name,service,mitre_tactic,mitre_technique,sources,time_delay_seconds
-SVC-TE-01,Threat Event,Impacket SMBexec service installation,TRUE,WKS04,bob.vance,Microsoft Update Control,%COMSPEC% /Q /c echo whoami ^> \\%COMPUTERNAME%\C$\__output 2^>^&1 > %SYSTEMROOT%\joLht.bat & %COMSPEC% /Q /c %SYSTEMROOT%\joLht.bat & del %SYSTEMROOT%\joLht.bat,"Lateral Movement
-Execution","Remote Services
-System Services: Service Execution",,
